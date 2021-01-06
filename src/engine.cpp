@@ -1,5 +1,7 @@
-#include "../include/engine.hpp"
+#include "engine.hpp"
+
 #include <iostream>
+#include <chrono>
 
 #define SLEEP(x) sleep(x * 1000)
 
@@ -9,19 +11,16 @@ Engine::Engine(Canvas *canvas) : canvas(canvas)
 
 void Engine::run()
 {
-    this->update();
-
-    int count = 0;
-    while (count < 10)
+    for (int i = 0; i < 10; i++)
     {
-        this->update();
-        std::cout << count << std::endl;
-        count++;
+        canvas->update();
+        std::cout << "count : " << i << std::endl;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 }
 
-void Engine::update()
+void Engine::start()
 {
-    canvas->clear();
-    canvas->draw();
+    worker = new std::thread(&Engine::run, this);
+    worker->join();
 }

@@ -2,6 +2,7 @@
 #define ENGINE_HPP
 
 #include "canvas.hpp"
+#include <thread>
 
 /**
  * Engine Class
@@ -13,11 +14,13 @@ class Engine
 {
 private:
     Canvas *canvas;
+    std::thread *worker;
+    void run();
     void update();
 
 public:
     Engine(Canvas *canvas);
-    void run();
+    void start();
 };
 
 #endif // ENGINE_HPP

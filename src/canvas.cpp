@@ -1,4 +1,5 @@
-#include "../include/canvas.hpp"
+#include "canvas.hpp"
+
 #include <iostream>
 
 Canvas::Canvas() : Canvas(16, 16) {}
@@ -19,15 +20,22 @@ Canvas::Canvas(int w, int h)
 
 void Canvas::draw()
 {
+    coutMutex.lock();
     for (int y = 0; y < height; y++)
     {
         for (int x = 0; x < width; x++)
             std::cout << array[y][x];
         std::cout << std::endl;
     }
+    coutMutex.unlock();
 }
 
 void Canvas::clear()
 {
     system("clear");
+}
+void Canvas::update()
+{
+    clear();
+    draw();
 }

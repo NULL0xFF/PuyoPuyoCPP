@@ -13,11 +13,9 @@ SET ( PROJECT_VERSION_PATCH 0 )
 SET ( PROJECT_VERSION_TWEAK 0 )
 configure_file( include/version.h.in version.h)
 
+find_package(Threads REQUIRED)
+
 # Create a sources variable with a link to all cpp files to compile
-# set(SOURCES
-#     src/bank.cpp
-#     src/main.cpp
-# )
 file(GLOB SOURCES
     "src/*.cpp"
 )
@@ -25,6 +23,7 @@ file(GLOB SOURCES
 # Add an executable with the above sources
 add_executable(PuyoPuyoCPP ${SOURCES})
 
+target_link_libraries(PuyoPuyoCPP Threads::Threads)
 # Set the directories that should be included in the build command for this target
 # when running g++ these will be included as -I/directory/path/
 target_include_directories(PuyoPuyoCPP

@@ -1,6 +1,0 @@
-#include <cstdlib>
-
-class Puyo
-{
-    
-}
